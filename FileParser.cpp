@@ -19,25 +19,31 @@ std::vector<std::string_view> FileParser::SplitString(
 ) 
 {
   std::vector<std::string_view> tokens;
-  size_t start = 0, end = 0;
+  std::size_t start = 0, end = 0;
 
   while (start < input.length()) 
   {
     end = input.length();
 
-    for (const std::string& delimiter : delimiters) 
-    {
-      size_t pos = input.find(delimiter, start);
-
-      if (pos != std::string::npos && pos < end) 
+    std::for_each(
+      delimiters.begin(),
+      delimiters.end(),
+      [&](const std::string& delim)
       {
-        end = pos;
+        size_t pos = input.find(delim, start);
+
+        if (pos != std::string::npos && pos < end)
+        {
+          end = pos;
+        }
       }
-    }
+    );
 
     if (end != start) 
     {
-      tokens.push_back(std::string_view(input).substr(start, end - start));
+      tokens.push_back(
+        std::string_view(input).substr(start, end - start)
+      );
     }
 
     if (end == input.length()) 

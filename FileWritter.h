@@ -30,14 +30,13 @@ private:
 
     if (outFile.is_open())
     {
-      outFile << "begin --> " << marker << std::endl;
+      outFile << "[" << marker  << "]" << std::endl;
 
       for (auto line : result)
       {
         outFile << line << std::endl;
       } 
 
-      outFile << "end    <--" << marker << std::endl;
       outFile.close();
 
       std::cerr << "Success:" << marker << std::endl;
