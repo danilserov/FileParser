@@ -8,13 +8,16 @@
 class FileParser
 {
 public:
-  FileParser(const std::filesystem::path& filePath);
+  FileParser(
+    const std::filesystem::path& filePath,
+    FileWritterPtr writter
+  );
   ~FileParser();
-  bool Parse(FileWritterPtr writter);
+  bool Parse();
 
 private:
-  bool DoParse(FileWritterPtr writter);
-
+  bool DoParse();
+  FileWritterPtr fileWritter_;
   const std::filesystem::path filePath_;
 
   std::vector<std::string_view> SplitString(

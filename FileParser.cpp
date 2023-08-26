@@ -2,8 +2,12 @@
 #include <fstream>
 #include "FileParser.h"
 
-FileParser::FileParser(const std::filesystem::path& filePath):
-  filePath_(filePath)
+FileParser::FileParser(
+  const std::filesystem::path& filePath,
+  FileWritterPtr writter
+):
+  filePath_(filePath),
+  fileWritter_(writter)
 {
 
 }
@@ -57,7 +61,7 @@ std::vector<std::string_view> FileParser::SplitString(
   return tokens;
 }
 
-bool FileParser::DoParse(FileWritterPtr writter)
+bool FileParser::DoParse()
 {
   bool result = false;
 
@@ -84,7 +88,7 @@ bool FileParser::DoParse(FileWritterPtr writter)
     std::stringstream ss;
     ss << "thread:" << threadId << " file:" << filePath_;
 
-    result = writter->WriteResult(
+    result = fileWritter_->WriteResult(
       SplitString(theString, delimeters),
       std::string_view(ss.str())
     );
@@ -98,11 +102,11 @@ bool FileParser::DoParse(FileWritterPtr writter)
   return result;
 }
 
-bool FileParser::Parse(FileWritterPtr writter)
+bool FileParser::Parse()
 {
   try
   {
-    return DoParse(writter);
+    return DoParse();
   }
   catch (std::exception& ex)
   {
