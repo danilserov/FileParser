@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
     if (entry.is_regular_file()) 
     {
       // This function starts a thread.
+      // Since it's std::async it uses thread pool.
       fileProc.AddFileToParse(entry.path());      
     }
   }
