@@ -1,31 +1,26 @@
 ﻿// FileParser.cpp : Defines the entry point for the application.
 //
-#include <iostream>
 #include <filesystem>
-#include <future>
-#include <queue>
 
-namespace fs = std::filesystem;
 #include "Program.h"
 #include "FileParser.h"
 #include "FileProcessor.h"
 
-using namespace std;
-
 int main(int argc, char* argv[])
 {
-	cout << "Hello FileParser." << endl;
+	std::cout << "Hello FileParser." << std::endl;
 
   if (argc < 3)
   {
-    std::cerr << "Usage: FileParser <inputdir> <outputfile>" << endl;
+    std::cerr << "Usage: FileParser <inputdir> <outputfile>" << std::endl;
     return 1;
   }
 
-  fs::path dirPath = argv[1];
-  if (!fs::exists(dirPath)) 
+  std::filesystem::path dirPath = argv[1];
+
+  if (!std::filesystem::exists(dirPath))
   {
-    std::cerr << "dir " << dirPath << " doesn't exist" << endl;
+    std::cerr << "dir " << dirPath << " doesn't exist" << std::endl;
     return 0;
   }
 
@@ -34,7 +29,7 @@ int main(int argc, char* argv[])
 
   FileProcessor fileProc(outputFileName);
 
-  for (const auto& entry : fs::directory_iterator(dirPath)) 
+  for (const auto& entry : std::filesystem::directory_iterator(dirPath))
   {
     if (entry.is_regular_file()) 
     {

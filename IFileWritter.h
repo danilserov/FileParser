@@ -1,7 +1,11 @@
 #pragma once
 #include <string_view>
+#include <vector>
 
 struct IFileWritter
 {
-  virtual void WriteResult(const std::string_view result) = 0;
+  virtual bool WriteResult(
+    const std::vector<std::string_view>& result,
+    std::string_view marker
+  ) = 0;
 };

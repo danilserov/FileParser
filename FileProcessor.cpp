@@ -4,7 +4,6 @@
 #include <fstream>
 #include <future>
 #include <queue>
-#include <algorithm>
 
 #include "FileProcessor.h"
 #include "FileParser.h"
