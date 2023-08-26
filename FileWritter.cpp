@@ -2,6 +2,17 @@
 
 #include "FileWritter.h"
 
+FileWritterPtr FileWritter::instance_ = nullptr;
+
+FileWritterPtr FileWritter::getInstance(const std::string& outputFileName)
+{
+  if (!instance_)
+  {
+    instance_.reset(new FileWritter(outputFileName));
+  }
+  return instance_;
+}
+
 bool FileWritter::WriteResult(
   const std::vector<std::string_view>& result,
   std::string_view marker

@@ -11,7 +11,7 @@
 using namespace std::chrono_literals;
 
 FileProcessor::FileProcessor(const std::string& outputFileName):
-  fileWritter_(new FileWritter(outputFileName))
+  fileWritter_(FileWritter::getInstance(outputFileName))
 {
 
 }

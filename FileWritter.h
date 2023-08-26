@@ -7,18 +7,22 @@
 #include <string_view>
 #include <vector>
 
+class FileWritter;
+typedef std::shared_ptr<FileWritter> FileWritterPtr;
+
 class FileWritter
 {
 private:
   std::mutex writeMux_;
   const std::string outputFileName_;
-
-public:
-
-  FileWritter(const std::string& outputFileName) :outputFileName_(outputFileName)
+  static FileWritterPtr instance_;
+  FileWritter() {};
+  FileWritter(const std::string& outputFileName)
+    :outputFileName_(outputFileName)
   {
-
   }
+public:
+  static FileWritterPtr getInstance(const std::string& outputFileName);
 
   bool WriteResult(
     const std::vector<std::string_view>& result,
@@ -26,4 +30,3 @@ public:
   );  
 };
 
-typedef std::shared_ptr<FileWritter> FileWritterPtr;
