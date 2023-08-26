@@ -27,12 +27,14 @@ int main(int argc, char* argv[])
   std::string outputFileName = argv[2];
   std::remove(outputFileName.c_str());
 
+  // This class is designed to be used from a single thread.
   FileProcessor fileProc(outputFileName);
 
   for (const auto& entry : std::filesystem::directory_iterator(dirPath))
   {
     if (entry.is_regular_file()) 
     {
+      // This function starts a thread.
       fileProc.AddFileToParse(entry.path());      
     }
   }
