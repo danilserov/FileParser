@@ -12,7 +12,7 @@ endif()
 project ("FileParser")
 
 # Add source to this project's executable.
-add_executable (FileParser "Program.cpp" "Program.h" "FileParser.h" "FileParser.cpp" "FileProcessor.h" "FileProcessor.cpp" "IFileWritter.h" "FileWritter.h")
+add_executable (FileParser "Program.cpp" "Program.h" "FileParser.h" "FileParser.cpp" "FileProcessor.h" "FileProcessor.cpp" "FileWritter.cpp" "FileWritter.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET FileParser PROPERTY CXX_STANDARD 20)

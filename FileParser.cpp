@@ -57,7 +57,7 @@ std::vector<std::string_view> FileParser::SplitString(
   return tokens;
 }
 
-bool FileParser::DoParse(IFileWritter* writter)
+bool FileParser::DoParse(FileWritterPtr writter)
 {
   bool result = false;
 
@@ -83,7 +83,6 @@ bool FileParser::DoParse(IFileWritter* writter)
     std::thread::id threadId = std::this_thread::get_id();
     std::stringstream ss;
     ss << "thread:" << threadId << " file:" << filePath_;
-    std::string threadIdStr = ss.str();
 
     result = writter->WriteResult(
       SplitString(theString, delimeters),
@@ -99,7 +98,7 @@ bool FileParser::DoParse(IFileWritter* writter)
   return result;
 }
 
-bool FileParser::Parse(IFileWritter* writter)
+bool FileParser::Parse(FileWritterPtr writter)
 {
   try
   {

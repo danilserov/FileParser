@@ -3,17 +3,17 @@
 #include <string>
 #include <vector>
 #include <filesystem>
-#include "IFileWritter.h"
+#include "FileWritter.h"
 
 class FileParser
 {
 public:
   FileParser(const std::filesystem::path& filePath);
   ~FileParser();
-  bool Parse(IFileWritter* writter);
+  bool Parse(FileWritterPtr writter);
 
 private:
-  bool DoParse(IFileWritter* writter);
+  bool DoParse(FileWritterPtr writter);
 
   const std::filesystem::path filePath_;
 

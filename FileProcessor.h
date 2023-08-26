@@ -8,7 +8,7 @@ class FileProcessor
 {
 private:
   std::queue<std::future<bool>> results_;
-  std::unique_ptr<FileWritter> fileWritter_;
+  std::shared_ptr<FileWritter> fileWritter_;
 public:
   explicit FileProcessor(const std::string& outputFileName);
   void AddFileToParse(const std::filesystem::path& filePath);

@@ -19,12 +19,13 @@ FileProcessor::FileProcessor(const std::string& outputFileName):
 void FileProcessor::AddFileToParse(const std::filesystem::path& filePath)
 {
   FileParserPtr parserPtr(new FileParser(filePath));
+
   auto handle = 
     std::async(
       std::launch::async,
       &FileParser::Parse,
       parserPtr,
-      static_cast<IFileWritter*>(fileWritter_.get())
+      fileWritter_
     );
   results_.push(std::move(handle));
 }
