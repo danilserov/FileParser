@@ -8,10 +8,15 @@ FileWritterPtr FileWritter::getInstance(const std::string& outputFileName)
 {
   if (!instance_)
   {
-    instance_.reset(new FileWritter(outputFileName));
+    instance_.reset(new FileWritter(outputFileName), FileWritter::CustomDeleter);
   }
   return instance_;
 }
+void FileWritter::CustomDeleter(FileWritter* ptr) {
+  std::cout << "Custom deleter called" << std::endl;
+  delete ptr;
+}
+
 
 bool FileWritter::WriteResult(
   const std::vector<std::string_view>& result,

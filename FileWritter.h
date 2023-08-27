@@ -21,6 +21,8 @@ private:
     :outputFileName_(outputFileName)
   {
   }
+  ~FileWritter() {};
+  static void CustomDeleter(FileWritter* ptr);
 public:
   static FileWritterPtr getInstance(const std::string& outputFileName);
 
