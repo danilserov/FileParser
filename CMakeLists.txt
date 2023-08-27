@@ -11,8 +11,14 @@ endif()
 
 project ("FileParser")
 
+include_directories(include)
+file(GLOB SOURCES src/*.cpp)
+file(GLOB HEADERS include/*.h)
 # Add source to this project's executable.
-add_executable (FileParser "Program.cpp" "Program.h" "FileParser.h" "FileParser.cpp" "FileProcessor.h" "FileProcessor.cpp" "FileWritter.cpp" "FileWritter.h")
+add_executable (FileParser 
+${SOURCES}
+${HEADERS}
+)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET FileParser PROPERTY CXX_STANDARD 20)
