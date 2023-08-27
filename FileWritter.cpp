@@ -4,6 +4,12 @@
 
 FileWritterPtr FileWritter::instance_ = nullptr;
 
+void FileWritter::CustomDeleter(FileWritter* ptr)
+{
+  std::cout << "Custom deleter called" << std::endl;
+  delete ptr;
+}
+
 FileWritterPtr FileWritter::getInstance(const std::string& outputFileName)
 {
   if (!instance_)
@@ -12,11 +18,6 @@ FileWritterPtr FileWritter::getInstance(const std::string& outputFileName)
   }
   return instance_;
 }
-void FileWritter::CustomDeleter(FileWritter* ptr) {
-  std::cout << "Custom deleter called" << std::endl;
-  delete ptr;
-}
-
 
 bool FileWritter::WriteResult(
   const std::vector<std::string_view>& result,
